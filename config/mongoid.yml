@@ -80,4 +80,3 @@ test:
         retry_interval: 0
 production:
   uri: <%= ENV['MONGOLAB_URI'] %>
-			        

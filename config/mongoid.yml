@@ -81,5 +81,4 @@ test:
 production:
   sessions:
     default:
-      database: twittermometro
-      uri: <%= ENV['MONGOLAB_URI'] %>
+      uri: mongodb://twitteruser:demopass@ds049157.mongolab.com:49157/twittermometro

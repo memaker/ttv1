@@ -79,4 +79,7 @@ test:
         max_retries: 1
         retry_interval: 0
 production:
-  uri: <%= ENV['MONGOLAB_URI'] %>
+  sessions:
+    default:
+      database: twittermometro
+      uri: <%= ENV['MONGOLAB_URI'] %>

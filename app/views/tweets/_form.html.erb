@@ -1,0 +1,14 @@
+<%= simple_form_for(@tweet) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :created_at %>
+    <%= f.input :text %>
+    <%= f.input :source %>
+    <%= f.input :lang %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

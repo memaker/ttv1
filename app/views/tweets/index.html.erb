@@ -1,6 +1,6 @@
 <h1>Listing tweets</h1>
 
-<table>
+<table class="table table-condensed">
   <tr>
     <th>Created at</th>
     <th>Text</th>
@@ -11,8 +11,16 @@
     <th></th>
   </tr>
 
+<%# success, error, warning, info %>
+
 <% @tweets.each do |tweet| %>
+  <% if tweet.sentiment == 1 %>
+  <tr class="success">
+  <% elsif tweet.sentiment == -1 %>
+  <tr class="error">
+  <% else %>
   <tr>
+  <% end %>
     <td><%= tweet.created_at %></td>
     <td><%= tweet.text %></td>
     <td><%= tweet.source %></td>
@@ -22,6 +30,9 @@
     <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+
+<%# <%= will_paginate @tweets, :renderer => BootstrapPagination::Rails %>
+
 </table>
 
 <br />

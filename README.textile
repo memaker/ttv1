@@ -78,3 +78,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 h2. License
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+h2. Notes
+
+Twitter bootstrap pagination
+https://github.com/markbates/jquery-bootstrap-pagination
+
+Firs implementation of Classifier https://github.com/cardmagic/classifier, add to Gemfile
+gem "classifier"
+gem "stemmer"
+gem "madeleine"
+$ bundle install
+
+Implementation of Bayes Motel
+gem "bayes_motel"
+$ bundle install

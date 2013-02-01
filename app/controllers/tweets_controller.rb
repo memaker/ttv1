@@ -3,6 +3,15 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     @tweets = Tweet.all
+    # @tweets = Tweet.paginate(page: params[:page])
+    # @users = User.paginate(page: params[:page])
+    
+=begin
+    # This is to calculate the sentiment for each tweet
+    @tweets.each do |tweet|
+      tweet.sentiment = "positive"
+    end
+=end
 
     respond_to do |format|
       format.html # index.html.erb

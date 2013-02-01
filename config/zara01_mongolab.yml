@@ -1,0 +1,11 @@
+# Twitter configuration
+# More info on how to register the application at http://dev.twitter.com
+consumer_key:    	om0AvElOnmtjAmBmjUmkg
+consumer_secret: 	ctVq0hN3zYyc90t6ZX7LidAp9RkNeqAwPOrWaPuteE
+oauth_token:        241596263-34CuJsLeexQOZlWMPkwJXjEEU0Ij9Z4ALUN9gRqG
+oauth_token_secret: fpJ1egXcGfq2gdiwM1GebRCQOA5eh4lr9XOO416eOo
+
+# Mongo configuration
+mongo_uri: 	mongodb://twitteruser:demopass@ds049157.mongolab.com:49157/twittermometro
+db_name: 	twittermometro
+collection: tweets

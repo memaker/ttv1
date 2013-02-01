@@ -28,6 +28,18 @@ gem "better_errors", ">= 0.3.2", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "heroku"
+gem "will_paginate-bootstrap"
+gem "classifier"
+gem "stemmer"
+gem "madeleine"
+gem "bayes_motel"
+
+# needed for the collector script
+gem 'tweetstream'
+gem 'mongo'
+gem 'bson_ext'
+gem 'rgl'
+
 group :production do
   gem "thin"
 end

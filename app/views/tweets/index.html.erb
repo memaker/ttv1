@@ -14,9 +14,9 @@
 <%# success, error, warning, info %>
 
 <% @tweets.each do |tweet| %>
-  <% if tweet.sentiment == 1 %>
+  <% if tweet.sentiment == "positive" %>
   <tr class="success">
-  <% elsif tweet.sentiment == -1 %>
+  <% elsif tweet.sentiment == "negative" %>
   <tr class="error">
   <% else %>
   <tr>
@@ -24,7 +24,7 @@
     <td><%= tweet.created_at %></td>
     <td><%= tweet.text %></td>
     <td><%= tweet.source %></td>
-    <td><%= tweet.lang %></td>
+    <td><%= tweet.sentiment %></td>
     <td><%= link_to 'Show', tweet %></td>
     <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
     <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

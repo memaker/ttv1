@@ -1,9 +1,10 @@
 class Bayes 
-  def initialize
-    # puts "foo"
+  def initialize(options)
+    @options = options
+    puts @options['bayes_file']
   end
-
-  def self.sentiment(str)
-    puts 'positive'
+  
+  def sentiment(str)
+    "positive"
   end
 end

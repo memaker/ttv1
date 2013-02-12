@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
-
 # Usage: tweet_collector.rb zara01_mongolab
+
+ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
 require 'mongo'
 require 'bayes'
 require 'bundler'
+require 'json'
 
 Bundler.require
 
@@ -49,18 +52,41 @@ TweetStream.configure do |config|
   config.oauth_token_secret = settings['oauth_token_secret']
 end
 
+# Bayes
+bayes = Bayes.new(settings)
+
+# SexMachine
+# Imp case sensitive as some firstnames will not be recognized
+d = SexMachine::Detector.new(:case_sensitive => false)
+
 # miner
 miner = TweetMiner.new(settings)
 
 # stream
 stream = TweetStream::Client.new
 stream.on_error { |msg| puts msg }
-stream.on_timeline_status do |status|
-  # convert status to hash
-  miner.insert_status status.to_hash
+  
+stream.on_timeline_status do |status|  
+    
+  # puts "[#{status.user.screen_name}] #{status.text}"
+  # puts "@#{status.user.screen_name} said"
+  # puts status.text
+
+  # calculate the sentiment
+  calculated_sentiment = bayes.sentiment(status.text)
+  # calculate the gender
+  # puts status.user.name.split(" ").first
+  calculated_gender = d.get_gender(status.user.name.split(" ").first)
+  # puts calculated_gender
+ 
+  my_tweet = { :text => status.text, :user => status.user.name, :gender => calculated_gender }
+  miner.insert_status my_tweet
+
+  # add the sentiment to the tweet
+  # miner.insert_status status.to_hash.merge!({"sentiment" => calculated_sentiment, "gender" => calculated_gender})
+      
   print "."
 end
 
 # start stream
 stream.userstream
-

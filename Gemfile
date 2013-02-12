@@ -33,6 +33,7 @@ gem "classifier"
 gem "stemmer"
 gem "madeleine"
 gem "bayes_motel"
+gem "sexmachine" # get gender from firstname
 
 # needed for the collector script
 gem 'tweetstream'

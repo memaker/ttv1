@@ -1,4 +1,13 @@
 Twittermometro::Application.routes.draw do
+  resources :corpus_anews
+
+
+  resources :corpus_negatives
+
+
+  resources :corpus_positives
+
+
   resources :tweets
 
 

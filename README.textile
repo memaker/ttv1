@@ -93,3 +93,10 @@ $ bundle install
 Implementation of Bayes Motel
 gem "bayes_motel"
 $ bundle install
+
+Upload data and generate the scaffold
+$ mongoimport -h ds049157.mongolab.com:49157 -d twittermometro -c corpus_positive -u twitteruser -p demopass --file corpus_positive.csv --type csv --headerline
+$ rails generate scaffold CorpusPositive sentence:text
+
+Upload data to mongolab
+$ mongoimport -h ds049157.mongolab.com:49157 -d twittermometro -c corpus_anew -u twitteruser -p demopass --file ANEW-Appendix.csv --type csv --headerline

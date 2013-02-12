@@ -9,3 +9,6 @@ oauth_token_secret: fpJ1egXcGfq2gdiwM1GebRCQOA5eh4lr9XOO416eOo
 mongo_uri: 	mongodb://twitteruser:demopass@ds049157.mongolab.com:49157/twittermometro
 db_name: 	twittermometro
 collection: tweets
+
+# Bayes configuration
+bayes_file: demo_param

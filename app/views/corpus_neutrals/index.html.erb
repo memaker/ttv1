@@ -1,0 +1,23 @@
+<h1>Listing corpus_neutrals</h1>
+
+<table>
+  <tr>
+    <th>Sentence</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @corpus_neutrals.each do |corpus_neutral| %>
+  <tr>
+    <td><%= corpus_neutral.sentence %></td>
+    <td><%= link_to 'Show', corpus_neutral %></td>
+    <td><%= link_to 'Edit', edit_corpus_neutral_path(corpus_neutral) %></td>
+    <td><%= link_to 'Destroy', corpus_neutral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Corpus neutral', new_corpus_neutral_path %>

@@ -1,7 +1,7 @@
 # Usage: rake RAILS_ENV=[development, test, production] twitter:tweet_collector [configuration file, ex: mass_media]
 require 'pp' # PrettyPrint
 
-namespace :twitter do
+namespace :twitterv3 do
   desc "it collects, analyzes and saves tweets"
   task :tweet_collector => :environment do
       
@@ -18,17 +18,18 @@ namespace :twitter do
       config.oauth_token_secret = settings['oauth_token_secret']
     end
     
-    # Bayes
-    # bayes_motel = BayesMotel.new
-    corpse = BayesMotel::Corpus.new('tweets')
-    Tweet.all.each do |tweet|
-      corpse.train(tweet, :positive)
+    # classifier
+    b = Classifier::Bayes.new 'positive', 'negative', 'neutral'
+    CorpusPositive.all.each do |tweet|
+      b.train_positive tweet.sentence
     end
-    Tweet.all.each do |tweet|
-      corpse.train(tweet, :negative)
+    CorpusNegative.all.each do |tweet|
+      b.train_negative tweet.sentence
     end
-    corpse.cleanup
-      
+    CorpusNeutral.all.each do |tweet|
+      b.train_neutral tweet.sentence
+    end
+             
     # SexMachine. IMP case sensitive as some first names will not be recognized
     sex_machine = SexMachine::Detector.new(:case_sensitive => false)
   
@@ -40,8 +41,8 @@ namespace :twitter do
       calculated_gender = sex_machine.get_gender(status.user.name.split(" ").first)
       
       # calculate the sentiment
-      calculated_sentiment = corpse.classify(status.text)
-  
+      calculated_sentiment = b.classify status.text
+      
       tweet = Tweet.new({ 
         :created_at => status.created_at,
         :text => status.text,

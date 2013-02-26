@@ -1,4 +1,7 @@
 Twittermometro::Application.routes.draw do
+  resources :corpus_neutrals
+
+
   resources :corpus_anews
 
 

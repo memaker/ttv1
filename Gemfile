@@ -29,11 +29,12 @@ gem "binding_of_caller", ">= 0.6.8", :group => :development
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "heroku"
 gem "will_paginate-bootstrap"
+# gem "stemmer" # not installed from source, so it is not needed
 gem "classifier"
-gem "stemmer"
 gem "madeleine"
 gem "bayes_motel"
 gem "sexmachine" # get gender from firstname
+gem "crm114"
 
 # needed for the collector script
 gem 'tweetstream'

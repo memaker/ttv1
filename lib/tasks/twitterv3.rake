@@ -5,12 +5,13 @@ namespace :twitterv3 do
   desc "it collects, analyzes and saves tweets"
   task :tweet_collector => :environment do
       
-    puts "tweet_collector is listening Twitter on #{ARGV[2]} mode"
+    puts "tweet_collector is collecting using the configuration #{ARGV[2]}"
     
     # config
     settings = YAML.load_file File.expand_path("config/#{ARGV[2]}.yml")
   
     # tweetstream
+    desc "Building the tweet stream"
     TweetStream.configure do |config|
       config.consumer_key       = settings['consumer_key']
       config.consumer_secret    = settings['consumer_secret']
@@ -19,6 +20,7 @@ namespace :twitterv3 do
     end
     
     # classifier
+    desc "Building the corpus"
     b = Classifier::Bayes.new 'positive', 'negative', 'neutral'
     CorpusPositive.all.each do |tweet|
       b.train_positive tweet.sentence
@@ -29,29 +31,45 @@ namespace :twitterv3 do
     CorpusNeutral.all.each do |tweet|
       b.train_neutral tweet.sentence
     end
+    CorpusAnew.all.each do |anew|
+      case anew.valmnall
+      when 0 .. 4
+        b.train_negative anew.sword
+      when 4 .. 6
+        b.train_neutral anew.sword
+      when 6 .. 10
+        b.train_positive anew.sword
+      end
+    end
              
     # SexMachine. IMP case sensitive as some first names will not be recognized
+    desc "Building the gender detector"
     sex_machine = SexMachine::Detector.new(:case_sensitive => false)
   
     # stream
+    desc "Enter the stream"
     stream = TweetStream::Client.new
     stream.on_error { |msg| puts msg }
     stream.on_timeline_status do |status|
-      # calculate the gender
-      calculated_gender = sex_machine.get_gender(status.user.name.split(" ").first)
       
-      # calculate the sentiment
-      calculated_sentiment = b.classify status.text
-      
-      tweet = Tweet.new({ 
-        :created_at => status.created_at,
-        :text => status.text,
-        :location => status.user.location,
-        :gender => calculated_gender,
-        :sentiment => calculated_sentiment
-      })
-      tweet.save
-      print "."
+      # only get the tweets in Spanish
+      if user.lang == 'es'
+        # calculate the gender
+        calculated_gender = sex_machine.get_gender(status.user.name.split(" ").first)
+        
+        # calculate the sentiment
+        calculated_sentiment = b.classify status.text
+        
+        tweet = Tweet.new({ 
+          :created_at => status.created_at,
+          :text => status.text,
+          :location => status.user.location,
+          :gender => calculated_gender,
+          :sentiment => calculated_sentiment
+        })
+        tweet.save
+        print "."        
+      end  
     end
   
     # start stream

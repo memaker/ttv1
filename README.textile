@@ -110,3 +110,7 @@ $ ./tweet_collector.rb zara01_mongolab
 
 # using Rake
 rake RAILS_ENV=production cron
+
+# ejecutar rake en Heroku
+cd twittermometro
+heroku run bundle exec rake RAILS_ENV=production twitterv3:tweet_collector mass_media

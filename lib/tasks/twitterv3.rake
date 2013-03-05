@@ -2,16 +2,16 @@
 require 'pp' # PrettyPrint
 
 namespace :twitterv3 do
-  desc "it collects, analyzes and saves tweets"
+  puts "it collects, analyzes and saves tweets"
   task :tweet_collector => :environment do
       
-    puts "tweet_collector is collecting using the configuration #{ARGV[2]}"
+    puts "tweet_collector is running using the configuration #{ARGV[2]}"
     
     # config
     settings = YAML.load_file File.expand_path("config/#{ARGV[2]}.yml")
   
     # tweetstream
-    desc "Building the tweet stream"
+    puts "Building the tweet stream"
     TweetStream.configure do |config|
       config.consumer_key       = settings['consumer_key']
       config.consumer_secret    = settings['consumer_secret']
@@ -20,7 +20,7 @@ namespace :twitterv3 do
     end
     
     # classifier
-    desc "Building the corpus"
+    puts "Building the corpus"
     b = Classifier::Bayes.new 'positive', 'negative', 'neutral'
     CorpusPositive.all.each do |tweet|
       b.train_positive tweet.sentence
@@ -43,34 +43,31 @@ namespace :twitterv3 do
     end
              
     # SexMachine. IMP case sensitive as some first names will not be recognized
-    desc "Building the gender detector"
+    puts "Building the gender detector"
     sex_machine = SexMachine::Detector.new(:case_sensitive => false)
   
     # stream
-    desc "Enter the stream"
+    puts "Enter the stream"
     stream = TweetStream::Client.new
     stream.on_error { |msg| puts msg }
     stream.on_timeline_status do |status|
       
-      # only get the tweets in Spanish
-      if user.lang == 'es'
-        # calculate the gender
-        calculated_gender = sex_machine.get_gender(status.user.name.split(" ").first)
+      # calculate the gender
+      calculated_gender = sex_machine.get_gender(status.user.name.split(" ").first)
         
-        # calculate the sentiment
-        calculated_sentiment = b.classify status.text
+      # calculate the sentiment
+      calculated_sentiment = b.classify status.text
         
-        tweet = Tweet.new({ 
-          :created_at => status.created_at,
-          :text => status.text,
-          :location => status.user.location,
-          :gender => calculated_gender,
-          :sentiment => calculated_sentiment
-        })
-        tweet.save
-        print "."        
-      end  
-    end
+      tweet = Tweet.new({ 
+        :created_at => status.created_at,
+        :text => status.text,
+        :location => status.user.location,
+        :gender => calculated_gender,
+        :sentiment => calculated_sentiment
+      })
+      tweet.save
+      print "."        
+    end  
   
     # start stream
     stream.userstream

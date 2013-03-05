@@ -1,9 +1,16 @@
 # Twitter configuration
 # More info on how to register the application at http://dev.twitter.com
-consumer_key:    	om0AvElOnmtjAmBmjUmkg
-consumer_secret: 	ctVq0hN3zYyc90t6ZX7LidAp9RkNeqAwPOrWaPuteE
-oauth_token:        241596263-34CuJsLeexQOZlWMPkwJXjEEU0Ij9Z4ALUN9gRqG
-oauth_token_secret: fpJ1egXcGfq2gdiwM1GebRCQOA5eh4lr9XOO416eOo
+# ttmometro
+consumer_key: Cn0NsXOhbbDMGjEUPq4pGA
+consumer_secret: KEKSq9nz9WWwQ5Glm4agIkDH9I8ASGfhkvNQQ4g66A
+oauth_token: 1117089848-CFysmxNRn82UhGsnmfCWUFmcTYDqTiznWvZrOKy
+oauth_token_secret: IjQK9bDC5ytorPNvnEtheeqmm8QABmN07c2DaeaaYc
+
+# Roberto
+#consumer_key: om0AvElOnmtjAmBmjUmkg
+#consumer_secret: ctVq0hN3zYyc90t6ZX7LidAp9RkNeqAwPOrWaPuteE
+#oauth_token: 241596263-34CuJsLeexQOZlWMPkwJXjEEU0Ij9Z4ALUN9gRqG
+#oauth_token_secret: fpJ1egXcGfq2gdiwM1GebRCQOA5eh4lr9XOO416eOo
 
 # Bayes configuration
 bayes_corpus_positive: corpus_positive

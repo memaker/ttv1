@@ -42,6 +42,9 @@ gem 'mongo'
 gem 'bson_ext'
 gem 'rgl'
 
+# needed for graphics
+gem 'lazy_high_charts'
+
 group :production do
   gem "thin"
 end

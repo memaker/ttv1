@@ -60,11 +60,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    columnize (0.3.6)
     commonjs (0.2.6)
     cookiejar (0.3.0)
     crm114 (1.0.3)
     daemons (1.1.9)
     database_cleaner (0.9.1)
+    debugger (1.6.2)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     devise (2.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -283,6 +290,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   crm114
   database_cleaner (>= 0.9.1)
+  debugger
   devise (>= 2.2.2)
   email_spec (>= 1.4.0)
   factory_girl_rails (>= 4.1.0)

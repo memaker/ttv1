@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Twittermometro::Application.load_tasks
+Ttv1::Application.load_tasks

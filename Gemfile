@@ -35,6 +35,7 @@ gem "madeleine"
 gem "bayes_motel"
 gem "sexmachine" # get gender from firstname
 gem "crm114"
+gem 'debugger' # needed for debug
 
 # needed for the collector script
 gem 'tweetstream'

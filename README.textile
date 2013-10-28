@@ -106,7 +106,7 @@ mongoimport -h localhost:27017 -d twittermometro_development -c corpus_anews --f
 
 Start the collector
 $ cd twittermometro/script
-$ ./tweet_collector.rb zara01_mongolab
+$ ./tweet_collector_v1.rb mass_media
 
 # using Rake
 rake RAILS_ENV=production cron

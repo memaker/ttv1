@@ -54,6 +54,8 @@ end
 
 # Bayes
 bayes = Bayes.new(settings)
+classifier = Classifier::Bayes.new('Funny', 'Not Funny')
+
 
 # SexMachine
 # Imp case sensitive as some firstnames will not be recognized

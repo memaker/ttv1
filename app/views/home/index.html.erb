@@ -1,10 +1,28 @@
 <h3>Home</h3>
-<%= high_chart("my_id", @h) %>
-<%= high_chart("my_id4", @chart) do |c| %>
-  <%= raw "options.tooltip.formatter = function() {return '<b> YUPI!! '+ this.point.name +'</b>: '+ this.y +' %';}"  %>
-  <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
-<% end %>
 
+<h3>Users</h3>
 <% @users.each do |user| %>
   <p>User: <%=link_to user.name, user %></p>
 <% end %>
+<br />
+
+<% if @tweets %>
+<h3>Tweets</h3>
+<table class="table table-striped">
+	<tr>
+		<th>Created at</th>
+		<th>Text</th>
+		<th>Gender</th>
+		<th>Sentiment</th>
+	</tr>
+	<% @tweets.each do |tweet| %>
+	<tr>
+		<td><%= tweet.created_at %></td>
+		<td><%= tweet.text %></td>
+		<td><%= tweet.gender %></td>
+		<td><%= @b.classify tweet.text %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
+

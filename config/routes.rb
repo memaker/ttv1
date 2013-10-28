@@ -1,4 +1,4 @@
-Twittermometro::Application.routes.draw do
+Ttv1::Application.routes.draw do
   resources :corpus_neutrals
 
 
